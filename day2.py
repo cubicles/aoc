@@ -3,75 +3,36 @@
 # created by Gabriel Salazar
 
 def yan_quen_po(p1: str, p2: str):
-    if p1 == 'A':
-        if p2 == 'X':
-            return 4
-        if p2 == 'Y':
-            return 8
-        if p2 == 'Z':
-            return 3
-    if p1 == 'B':
-        if p2 == 'X':
-            return 1
-        if p2 == 'Y':
-            return 5
-        if p2 == 'Z':
-            return 9
-    if p1 == 'C':
-        if p2 == 'X':
-            return 7
-        if p2 == 'Y':
-            return 2
-        if p2 == 'Z':
-            return 6
-    else:
-        return "ERROR"
-
+    match_dict = {'AX': 4, 'AY': 8, 'AZ': 3,
+                  'BX': 1, 'BY': 5, 'BZ': 9,
+                  'CX': 7, 'CY': 2, 'CZ': 6}
+    return match_dict[p1+p2]
 
 def yan_quen_two(p1: str, p2: str):
-    if p1 == 'A':
-        if p2 == 'X':
-            return 'Z'
-        if p2 == 'Y':
-            return 'X'
-        if p2 == 'Z':
-            return 'Y'
-    if p1 == 'B':
-        if p2 == 'X':
-            return 'X'
-        if p2 == 'Y':
-            return 'Y'
-        if p2 == 'Z':
-            return 'Z'
-    if p1 == 'C':
-        if p2 == 'X':
-            return 'Y'
-        if p2 == 'Y':
-            return 'Z'
-        if p2 == 'Z':
-            return 'X'
-    else:
-        return "ERROR"
+    match_dict = {'AX': 'Z', 'AY': 'X', 'AZ': 'Y',
+                  'BX': 'X', 'BY': 'Y', 'BZ': 'Z',
+                  'CX': 'Y', 'CY': 'Z', 'CZ': 'X'}
+    return match_dict[p1+p2]
 
 def part1(data_path: str):
     with open(data_path) as file:
         count = 0
         for line in file:
-            player_1 = line.rstrip().split(" ")[0]
-            player_2 = line.rstrip().split(" ")[1]
-            score_round = yan_quen_po(player_1, player_2)
-            count = count + score_round
+            formatted_line = line.rstrip().split(" ")
+            player_1, player_2 = formatted_line[0], formatted_line[1]
+            round_score = yan_quen_po(player_1, player_2)
+            count = count + round_score
     return count
 
 def part2(data_path: str) -> int:
     with open(data_path) as file:
         count = 0
         for line in file:
-            player_1 = line.rstrip().split(" ")[0]
-            player_2 = line.rstrip().split(" ")[1]
+            formatted_line = line.rstrip().split(" ")
+            player_1, player_2 = formatted_line[0], formatted_line[1]
             new_move = yan_quen_two(player_1, player_2)
-            score_round = yan_quen_po(player_1, new_move)
-            count = count + score_round
+            round_score = yan_quen_po(player_1, new_move)
+            count = count + round_score
     return count
 
 if __name__ == '__main__':
