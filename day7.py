@@ -14,7 +14,7 @@ def part2(data_path: str):
 
 if __name__ == '__main__':
     # input
-    data_path = 'input/day4.txt'
+    data_path = 'input/day2.txt'
 
     # part 1 + 2
     print(part1(data_path))
